@@ -12,6 +12,8 @@ if (builder.Environment.IsDevelopment())
 }
 
 var orleans = builder.AddOrleans("orleans-engine")
+    .WithClusterId("orleans-cluster")
+    .WithServiceId("BatchProcessing")
     .WithClustering(redis);
 
 builder.AddProject<Projects.BatchProcessing_Dashboard>("dashboard")

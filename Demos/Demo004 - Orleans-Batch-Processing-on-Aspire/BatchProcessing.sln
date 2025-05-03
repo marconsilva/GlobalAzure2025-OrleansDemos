@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp.Client", "BatchProcessing.WebApp.Client\BatchProcessing.WebApp.Client.csproj", "{8E562C3C-411B-BEFB-9565-7B32FA70264B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalScaler", "ExternalScaler\ExternalScaler.csproj", "{D626D7EE-47E3-3076-7D8C-7D231725F632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{8E562C3C-411B-BEFB-9565-7B32FA70264B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E562C3C-411B-BEFB-9565-7B32FA70264B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E562C3C-411B-BEFB-9565-7B32FA70264B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D626D7EE-47E3-3076-7D8C-7D231725F632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D626D7EE-47E3-3076-7D8C-7D231725F632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D626D7EE-47E3-3076-7D8C-7D231725F632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D626D7EE-47E3-3076-7D8C-7D231725F632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +95,7 @@ Global
 		{301A8332-7BFF-4CE9-976A-59927EFCF2F4} = {9640F068-2490-4BBB-80FC-218B5B5DDAE1}
 		{8570CE4B-8489-8B6F-3F79-2AE55FD9B13D} = {9DE536E2-5219-4834-95FA-73C6E0342183}
 		{8E562C3C-411B-BEFB-9565-7B32FA70264B} = {9DE536E2-5219-4834-95FA-73C6E0342183}
+		{D626D7EE-47E3-3076-7D8C-7D231725F632} = {9DE536E2-5219-4834-95FA-73C6E0342183}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19770AAE-F539-4FFF-9397-7F9C38F3EC0D}

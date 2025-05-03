@@ -1,6 +1,5 @@
 using BatchProcessing.Abstractions.Grains;
 using BatchProcessing.WebApp.Components;
-using BatchProcessing.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.FluentUI.AspNetCore.Components;
 
