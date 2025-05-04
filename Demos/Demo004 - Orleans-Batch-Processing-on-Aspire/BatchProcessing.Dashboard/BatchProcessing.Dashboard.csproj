@@ -4,11 +4,13 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+    <NoWarn>ORLEANSEXP003</NoWarn>
+  </PropertyGroup>
 
 	<ItemGroup>
     <PackageReference Include="Aspire.StackExchange.Redis" />
     <PackageReference Include="Microsoft.Orleans.Clustering.Redis" />
+    <PackageReference Include="Microsoft.Orleans.GrainDirectory.Redis" />
     <PackageReference Include="Microsoft.Orleans.Server" />
     <PackageReference Include="OrleansDashboard" />
   </ItemGroup>

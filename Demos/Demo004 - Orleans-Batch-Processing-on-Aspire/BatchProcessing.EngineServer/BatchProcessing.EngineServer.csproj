@@ -8,11 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+    <PackageReference Include="Aspire.StackExchange.Redis" />
     <PackageReference Include="Microsoft.Orleans.Clustering.Redis" />
     <PackageReference Include="Microsoft.Orleans.GrainDirectory.Redis" />
-		<PackageReference Include="Microsoft.Orleans.Server" />
-    <PackageReference Include="Aspire.StackExchange.Redis" />
-		<PackageReference Include="OrleansDashboard" />
+    <PackageReference Include="Microsoft.Orleans.Server" />
+    <PackageReference Include="OrleansDashboard" />
 	</ItemGroup>
 
 	<ItemGroup>
