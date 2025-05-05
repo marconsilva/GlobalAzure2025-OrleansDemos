@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BatchProcessing.Grains\BatchProcessing.Grains.csproj" />
-		<ProjectReference Include="..\BatchProcessing.ServiceDefaults\BatchProcessing.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\Grains\BatchProcessing.Grains.csproj" />
+		<ProjectReference Include="..\ServiceDefaults\BatchProcessing.ServiceDefaults.csproj" />
 	</ItemGroup>
 </Project>

@@ -16,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BatchProcessing.Abstractions\BatchProcessing.Abstractions.csproj" />
-    <ProjectReference Include="..\BatchProcessing.ServiceDefaults\BatchProcessing.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\BatchProcessing.WebApp.Client\BatchProcessing.WebApp.Client.csproj" />
+    <ProjectReference Include="..\Abstractions\BatchProcessing.Abstractions.csproj" />
+    <ProjectReference Include="..\ServiceDefaults\BatchProcessing.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\WebApp.Client\BatchProcessing.WebApp.Client.csproj" />
   </ItemGroup>
 
 </Project>

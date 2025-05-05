@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\BatchProcessing.Domain\BatchProcessing.Domain.csproj" />
-	  <ProjectReference Include="..\BatchProcessing.Shared\BatchProcessing.Shared.csproj" />
+	  <ProjectReference Include="..\Domain\BatchProcessing.Domain.csproj" />
+	  <ProjectReference Include="..\Shared\BatchProcessing.Shared.csproj" />
 	</ItemGroup>
 </Project>

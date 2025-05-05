@@ -12,8 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BatchProcessing.EngineServer\BatchProcessing.EngineServer.csproj" />
-    <ProjectReference Include="..\BatchProcessing.WebApp\BatchProcessing.WebApp.csproj" />
+    <ProjectReference Include="..\EngineServer\BatchProcessing.EngineServer.csproj" />
+    <ProjectReference Include="..\WebApp\BatchProcessing.WebApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

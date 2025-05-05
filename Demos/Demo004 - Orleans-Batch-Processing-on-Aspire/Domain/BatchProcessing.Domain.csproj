@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BatchProcessing.Shared\BatchProcessing.Shared.csproj" />
+    <ProjectReference Include="..\Shared\BatchProcessing.Shared.csproj" />
   </ItemGroup>
 
 </Project>

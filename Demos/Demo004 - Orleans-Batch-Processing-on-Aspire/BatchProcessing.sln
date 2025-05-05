@@ -2,15 +2,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.34909.67
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.AppHost", "BatchProcessing.AppHost\BatchProcessing.AppHost.csproj", "{7341BB14-6A53-4F76-9A32-BA3983A933D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.AppHost", "AppHost\BatchProcessing.AppHost.csproj", "{7341BB14-6A53-4F76-9A32-BA3983A933D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.ServiceDefaults", "BatchProcessing.ServiceDefaults\BatchProcessing.ServiceDefaults.csproj", "{93164E97-6D73-465F-877B-A478AF53AFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.ServiceDefaults", "ServiceDefaults\BatchProcessing.ServiceDefaults.csproj", "{93164E97-6D73-465F-877B-A478AF53AFA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.EngineServer", "BatchProcessing.EngineServer\BatchProcessing.EngineServer.csproj", "{15F207EA-81AE-47E4-8F07-745686D2682E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.EngineServer", "EngineServer\BatchProcessing.EngineServer.csproj", "{15F207EA-81AE-47E4-8F07-745686D2682E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Grains", "BatchProcessing.Grains\BatchProcessing.Grains.csproj", "{6C6EBEAD-1296-469C-AD16-518C8284EEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Grains", "Grains\BatchProcessing.Grains.csproj", "{6C6EBEAD-1296-469C-AD16-518C8284EEB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Abstractions", "BatchProcessing.Abstractions\BatchProcessing.Abstractions.csproj", "{16CE1C75-9BBC-4716-ABBF-8537335776CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Abstractions", "Abstractions\BatchProcessing.Abstractions.csproj", "{16CE1C75-9BBC-4716-ABBF-8537335776CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{9DE536E2-5219-4834-95FA-73C6E0342183}"
 EndProject
@@ -18,13 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9640F0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7C2BC223-80EC-496C-8246-00B8C15E1114}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Domain", "BatchProcessing.Domain\BatchProcessing.Domain.csproj", "{AB9D8FEF-FB1A-46D8-9591-04E78993F817}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchProcessing.Domain", "Domain\BatchProcessing.Domain.csproj", "{AB9D8FEF-FB1A-46D8-9591-04E78993F817}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.Shared", "BatchProcessing.Shared\BatchProcessing.Shared.csproj", "{301A8332-7BFF-4CE9-976A-59927EFCF2F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.Shared", "Shared\BatchProcessing.Shared.csproj", "{301A8332-7BFF-4CE9-976A-59927EFCF2F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp", "BatchProcessing.WebApp\BatchProcessing.WebApp.csproj", "{8570CE4B-8489-8B6F-3F79-2AE55FD9B13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp", "WebApp\BatchProcessing.WebApp.csproj", "{8570CE4B-8489-8B6F-3F79-2AE55FD9B13D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp.Client", "BatchProcessing.WebApp.Client\BatchProcessing.WebApp.Client.csproj", "{8E562C3C-411B-BEFB-9565-7B32FA70264B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchProcessing.WebApp.Client", "WebApp.Client\BatchProcessing.WebApp.Client.csproj", "{8E562C3C-411B-BEFB-9565-7B32FA70264B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalScaler", "ExternalScaler\ExternalScaler.csproj", "{D626D7EE-47E3-3076-7D8C-7D231725F632}"
 EndProject
