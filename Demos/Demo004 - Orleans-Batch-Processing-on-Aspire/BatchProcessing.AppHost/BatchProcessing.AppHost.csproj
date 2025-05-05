@@ -12,7 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BatchProcessing.Dashboard\BatchProcessing.Dashboard.csproj" />
     <ProjectReference Include="..\BatchProcessing.EngineServer\BatchProcessing.EngineServer.csproj" />
     <ProjectReference Include="..\BatchProcessing.WebApp\BatchProcessing.WebApp.csproj" />
   </ItemGroup>

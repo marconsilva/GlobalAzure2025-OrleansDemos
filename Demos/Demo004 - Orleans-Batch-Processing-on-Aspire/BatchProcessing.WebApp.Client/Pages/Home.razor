@@ -41,7 +41,7 @@
 {
 	<div>
 		<FluentCard MinimalStyle="true">
-			<FluentGrid AdaptiveRendering="true">
+			<FluentGrid AdaptiveRendering="true" Spacing="1">
 				<FluentGridItem sm="2" xs="4">
 					<FluentLabel Weight="FontWeight.Bold">Analysis Timestamp</FluentLabel>
 				</FluentGridItem>
@@ -66,7 +66,7 @@
 				<FluentGridItem sm="4" xs="8">
 					<FluentLabel>@_result.AverageHouseholdSize.ToString("N2")</FluentLabel>
 				</FluentGridItem>
-				@foreach (var msc in _result.MaritalStatusCounts)
+				@foreach (var msc in _result.MaritalStatusCounts.OrderBy(_ => _.MaritalStatus))
 				{
 					<FluentGridItem sm="2" xs="4">
 						<FluentLabel Weight="FontWeight.Bold">@msc.MaritalStatus</FluentLabel>

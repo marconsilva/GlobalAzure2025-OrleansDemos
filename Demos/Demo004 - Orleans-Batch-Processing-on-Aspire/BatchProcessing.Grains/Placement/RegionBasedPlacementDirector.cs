@@ -8,7 +8,8 @@ internal class RegionBasedPlacementDirector(ISiloMetadataCache siloMetadataCache
 
     public Task<SiloAddress> OnAddActivation(PlacementStrategy strategy, PlacementTarget target, IPlacementContext context)
     {
-        var regionScope = target.RequestContextData[RegionHintKey] as string ?? target.GrainIdentity.GetKeyExtension();
+        var regionScope = target.RequestContextData?.TryGetValue(RegionHintKey, out var regionHint) == true && regionHint is string
+            ? (string)regionHint : target.GrainIdentity.GetKeyExtension();
 
         var compatibleSilos = context.GetCompatibleSilos(target)
             .Where(s => siloMetadataCache.GetSiloMetadata(s).Metadata.GetValueOrDefault(RegionHintKey) == regionScope)

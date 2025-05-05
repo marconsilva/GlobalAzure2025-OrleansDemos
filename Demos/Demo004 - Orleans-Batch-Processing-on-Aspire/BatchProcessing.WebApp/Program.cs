@@ -39,8 +39,8 @@ app.MapRazorComponents<App>()
 
 app.MapPost("/batchProcessing", async (IClusterClient client, [FromBody] int records, [FromQuery] string region = "NA") =>
 {
-    RequestContext.Set("cloud.region", region);
     var grain = client.GetGrain<IEngineGrain>(Guid.NewGuid());
+    RequestContext.Set("cloud.region", region);
     await grain.RunAnalysis(records);
     return grain.GetPrimaryKey();
 });
