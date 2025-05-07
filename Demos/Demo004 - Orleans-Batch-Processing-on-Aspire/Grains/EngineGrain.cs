@@ -17,7 +17,7 @@ namespace BatchProcessing.Grains;
 /// The EngineGrain class is responsible for simulating the processing of records.
 /// It coordinates with the EngineGovernorGrain to ensure that the number of concurrently running engines does not exceed the allowed capacity.
 /// </summary>
-[RegionBasedPlacement]
+[RegionDelegatingPlacement<RandomPlacement>]
 internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig> config, ILogger<EngineGrain> logger) : Grain, IEngineGrain
 {
     private readonly CancellationTokenSource _shutdownCancellation = new();
@@ -42,7 +42,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
     {
         if (_backgroundTask is null or { IsCompleted: true })
         {
-            _regionScope = RequestContext.Get(RegionBasedPlacementDirector.RegionHintKey) as string;
+            _regionScope = RequestContext.Get(RegionDelegatingPlacement.RegionHintKey) as string;
             _regionScope ??= this.GetGrainId().GetKeyExtension();
 
             await CreateRecords(recordsToSimulate);
@@ -144,7 +144,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
                 i++;
             }
 
-            RequestContext.Set(RegionBasedPlacementDirector.RegionHintKey, _regionScope);
+            RequestContext.Set(RegionDelegatingPlacement.RegionHintKey, _regionScope);
 
             await Task.WhenAll(workerTasks);
 

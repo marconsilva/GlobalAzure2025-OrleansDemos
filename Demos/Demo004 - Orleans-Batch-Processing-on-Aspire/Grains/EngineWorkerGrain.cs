@@ -8,14 +8,14 @@ using Orleans.Runtime.Placement;
 
 namespace BatchProcessing.Grains;
 
-[RegionBasedPlacement]
+[RegionDelegatingPlacement<RandomPlacement>]
 internal class EngineWorkerGrain(ContextFactory contextFactory, ILogger<EngineWorkerGrain> logger) : Grain, IEngineWorkerGrain
 {
     private static readonly Random Random = new();
 
     public async Task DoWork(Guid id)
     {
-        var regionScope = RequestContext.Get(RegionBasedPlacementDirector.RegionHintKey) as string;
+        var regionScope = RequestContext.Get(RegionDelegatingPlacement.RegionHintKey) as string;
         logger.LogInformation("{Id} in region {RegionScope} is processing item {ItemId}", this.GetGrainId(), regionScope, id);
 
         try
