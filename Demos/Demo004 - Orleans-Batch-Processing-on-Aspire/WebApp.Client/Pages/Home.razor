@@ -14,217 +14,219 @@
 <h1>Batch Engine Simulator</h1>
 
 <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Left" Style="border: calc(var(--stroke-width) * 1px) solid var(--neutral-stroke-rest); border-radius: calc(var(--control-corner-radius) * 1px); padding: 1rem 1rem;">
-	<FluentRadioGroup @bind-Value="_regionScope" Name="region" Orientation="Orientation.Horizontal">
-		@foreach (var item in _regionScopes)
-		{
-			<FluentRadio Value="@item.Key">@item.Value</FluentRadio>
-		}
-	</FluentRadioGroup>
-	<FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Bottom">
-		<FluentNumberField Label="Records to Create" @bind-Value="@_recordsToCreate" Step="300" Min="10" />
-		<FluentButton Appearance="Appearance.Accent" OnClick="@RunAnalysis" Disabled="@_isSubmitting">Simulate Batch Run</FluentButton>
-	</FluentStack>
+    <FluentRadioGroup @bind-Value="_regionScope" Name="region" Orientation="Orientation.Horizontal">
+        @foreach (var item in _regionScopes)
+        {
+            <FluentRadio Value="@item.Key">@item.Value</FluentRadio>
+        }
+    </FluentRadioGroup>
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Bottom">
+        <FluentNumberField Label="Records to Create" @bind-Value="@_recordsToCreate" Step="300" Min="10" />
+        <FluentButton Appearance="Appearance.Accent" OnClick="@RunAnalysis" Disabled="@_isSubmitting">Simulate Batch Run</FluentButton>
+    </FluentStack>
 </FluentStack>
 <div>
-	<FluentDataGrid Id="batches" TGridItem="EngineStatusRecord" Items="@_engineRuns.AsQueryable()" Pagination="@_pagination" AutoFit="true" Style="overflow-x: auto;">
-		<SelectColumn TGridItem="EngineStatusRecord" Property="@(e => e.Id == _selectedId)" OnSelect="@(e => OnSelect(e.Item.Id, e.Selected))" Selectable="@(e => e.Status == AnalysisStatus.Completed)" SelectFromEntireRow="true" />
-		<PropertyColumn Title="Id" Property="@(c => c!.Id)" Align="Align.Start" />
-		<PropertyColumn Title="Status" Property="@(c => c!.Status)" Align="Align.Center" />
-		<PropertyColumn Title="Region" Property="@(c => c!.RegionScope)" Align="Align.Center" />
-		<PropertyColumn Title="Processed" Property="@(c => c!.RecordsProcessed)" Align="Align.Center" />
-		<PropertyColumn Title="Total Records" Property="@(c => c!.RecordCount)" Align="Align.Center" />
-	</FluentDataGrid>
+    <FluentDataGrid Id="batches" TGridItem="EngineStatusRecord" Items="@_engineRuns.AsQueryable()" Pagination="@_pagination" AutoFit="true" Style="overflow-x: auto;">
+        <SelectColumn TGridItem="EngineStatusRecord" Property="@(e => e.Id == _selectedId)" OnSelect="@(e => OnSelect(e.Item.Id, e.Selected))" Selectable="@(e => e.Status == AnalysisStatus.Completed)" SelectFromEntireRow="true" />
+        <PropertyColumn Title="Id" Property="@(c => c!.Id)" Align="Align.Start" />
+        <PropertyColumn Title="Status" Property="@(c => c!.Status)" Align="Align.Center" />
+        <PropertyColumn Title="Region" Property="@(c => c!.RegionScope)" Align="Align.Center" />
+        <PropertyColumn Title="Processed" Property="@(c => c!.RecordsProcessed)" Align="Align.Center" />
+        <PropertyColumn Title="Total Records" Property="@(c => c!.RecordCount)" Align="Align.Center" />
+    </FluentDataGrid>
 </div>
 <FluentPaginator State="@_pagination" />
 
 @if (_result != null)
 {
-	<div>
-		<FluentCard MinimalStyle="true">
-			<FluentGrid AdaptiveRendering="true" Spacing="1">
-				<FluentGridItem sm="2" xs="4">
-					<FluentLabel Weight="FontWeight.Bold">Analysis Timestamp</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="4" xs="8">
-					<FluentLabel>@_result.AnalysisTimestamp</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="2" xs="4">
-					<FluentLabel Weight="FontWeight.Bold">Average Dependents</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="4" xs="8">
-					<FluentLabel>@_result.AverageDependents.ToString("N2")</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="2" xs="4">
-					<FluentLabel Weight="FontWeight.Bold">Average Age</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="4" xs="8">
-					<FluentLabel>@_result.AverageAge.ToString("N2")</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="2" xs="4">
-					<FluentLabel Weight="FontWeight.Bold">Average Household Size</FluentLabel>
-				</FluentGridItem>
-				<FluentGridItem sm="4" xs="8">
-					<FluentLabel>@_result.AverageHouseholdSize.ToString("N2")</FluentLabel>
-				</FluentGridItem>
-				@foreach (var msc in _result.MaritalStatusCounts.OrderBy(_ => _.MaritalStatus))
-				{
-					<FluentGridItem sm="2" xs="4">
-						<FluentLabel Weight="FontWeight.Bold">@msc.MaritalStatus</FluentLabel>
-					</FluentGridItem>
-					<FluentGridItem sm="4" xs="8">
-						<FluentLabel>@msc.AverageCount.ToString("N2")</FluentLabel>
-					</FluentGridItem>
-				}
-			</FluentGrid>
-		</FluentCard>
-	</div>
+    <div>
+        <FluentCard MinimalStyle="true">
+            <FluentGrid AdaptiveRendering="true" Spacing="1">
+                <FluentGridItem sm="2" xs="4">
+                    <FluentLabel Weight="FontWeight.Bold">Analysis Timestamp</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="4" xs="8">
+                    <FluentLabel>@_result.AnalysisTimestamp</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="2" xs="4">
+                    <FluentLabel Weight="FontWeight.Bold">Average Dependents</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="4" xs="8">
+                    <FluentLabel>@_result.AverageDependents.ToString("N2")</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="2" xs="4">
+                    <FluentLabel Weight="FontWeight.Bold">Average Age</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="4" xs="8">
+                    <FluentLabel>@_result.AverageAge.ToString("N2")</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="2" xs="4">
+                    <FluentLabel Weight="FontWeight.Bold">Average Household Size</FluentLabel>
+                </FluentGridItem>
+                <FluentGridItem sm="4" xs="8">
+                    <FluentLabel>@_result.AverageHouseholdSize.ToString("N2")</FluentLabel>
+                </FluentGridItem>
+                @foreach (var msc in _result.MaritalStatusCounts.OrderBy(_ => _.MaritalStatus))
+                {
+                    <FluentGridItem sm="2" xs="4">
+                        <FluentLabel Weight="FontWeight.Bold">@msc.MaritalStatus</FluentLabel>
+                    </FluentGridItem>
+                    <FluentGridItem sm="4" xs="8">
+                        <FluentLabel>@msc.AverageCount.ToString("N2")</FluentLabel>
+                    </FluentGridItem>
+                }
+            </FluentGrid>
+        </FluentCard>
+    </div>
 }
 
 @code {
-	private readonly PaginationState _pagination = new PaginationState { ItemsPerPage = 10 };
-	private readonly ConcurrentBag<EngineStatusRecord> _engineRuns = new();
-	private readonly Dictionary<string, string> _regionScopes = new()
-	{
-		{ "NA", "North America" },
-		{ "WE", "Western Europe" },
-		{ "AU", "Australia" }
-	};
-	private Guid? _selectedId = null;
-	private BatchProcessResut? _result = null;
-	private Timer? _timer;
-	private int _recordsToCreate = 300;
-	private string? _regionScope = "NA";
-	private bool _isSubmitting = false;
+    private readonly PaginationState _pagination = new PaginationState { ItemsPerPage = 10 };
+    private readonly ConcurrentBag<EngineStatusRecord> _engineRuns = new();
+    private static readonly Dictionary<string, string> _regionScopes = new()
+    {
+        { "NA", "North America" },
+        { "WE", "Western Europe" },
+        { "AU", "Australia" }
+    };
+    private Guid? _selectedId = null;
+    private BatchProcessResut? _result = null;
+    private Timer? _timer;
+    private int _recordsToCreate = 300;
+    private string _regionScope = _regionScopes.First().Key;
+    private bool _isSubmitting = false;
 
-	protected override async Task OnInitializedAsync()
-	{
-		await UpdateEngineRuns();
-		_timer = new Timer(async _ => await CheckStatus(), null, 0, 500);
-	}
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateEngineRuns();
+        _timer = new Timer(async _ => await CheckStatus(), null, 0, 500);
+    }
 
-	private async Task CheckStatus()
-	{
-		if (_engineRuns.Count == 0)
-		{
-			await UpdateEngineRuns();
-		}
+    private async Task CheckStatus()
+    {
+        if (_engineRuns.Count == 0)
+        {
+            await UpdateEngineRuns();
+        }
 
-		foreach (var item in _engineRuns)
-		{
-			await UpdateEngineStatus(item);
-		}
+        foreach (var item in _engineRuns)
+        {
+            await UpdateEngineStatus(item);
+        }
 
-		await UpdateEngineResult();
-		await InvokeAsync(StateHasChanged);
-	}
+        await UpdateEngineResult();
+        await InvokeAsync(StateHasChanged);
+    }
 
-	private Task OnSelect(Guid id, bool selected)
-	{
-		if (selected)
-		{
-			_selectedId = id;
-		}
+    private Task OnSelect(Guid id, bool selected)
+    {
+        if (selected)
+        {
+            _selectedId = id;
+        }
 
-		return Task.CompletedTask;
-	}
+        return Task.CompletedTask;
+    }
 
-	private async Task RunAnalysis()
-	{
-		_isSubmitting = true;
+    private async Task RunAnalysis()
+    {
+        _isSubmitting = true;
+        _regionScopes.TryGetValue(_regionScope, out var regionScopeName);
 
-		try
-		{
-			var runGuid = await Api.StartBatchProcessingAsync(_recordsToCreate, _regionScope);
-			_engineRuns.Add(new EngineStatusRecord
-			{
-				Id = runGuid,
-				RegionScope = _regionScope != null ? _regionScopes[_regionScope] : null,
-				Status = AnalysisStatus.NotStarted
-			});
-		}
-		catch (Exception ex)
-		{
-			MessageService.ShowMessageBar(options =>
-			{
-				options.Title = $"Error creating new batch.";
-				options.Body = ex.Message;
-				options.Intent = MessageIntent.Error;
-				options.Section = "MESSAGES_TOP";
-				options.Timeout = 4000;
-			});
-		}
+        try
+        {
+            var runGuid = await Api.StartBatchProcessingAsync(_recordsToCreate, _regionScope);
+            _engineRuns.Add(new EngineStatusRecord
+                {
+                    Id = runGuid,
+                    RegionScope = regionScopeName,
+                    Status = AnalysisStatus.NotStarted
+                });
+        }
+        catch (Exception ex)
+        {
+            MessageService.ShowMessageBar(options =>
+            {
+                options.Title = $"Error creating new batch.";
+                options.Body = ex.Message;
+                options.Intent = MessageIntent.Error;
+                options.Section = "MESSAGES_TOP";
+                options.Timeout = 4000;
+            });
+        }
 
-		_isSubmitting = false;
-	}
+        _isSubmitting = false;
+    }
 
-	private async Task UpdateEngineRuns()
-	{
-		try
-		{
-			var runs = await Api.GetAllBatchProcessingStatusAsync();
+    private async Task UpdateEngineRuns()
+    {
+        try
+        {
+            var runs = await Api.GetAllBatchProcessingStatusAsync();
 
-			_engineRuns.Clear();
+            _engineRuns.Clear();
 
-			foreach (var item in runs)
-				_engineRuns.Add(item);
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine(ex.Message);
-		}
-	}
+            foreach (var item in runs)
+                _engineRuns.Add(item);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 
-	private async Task UpdateEngineStatus(EngineStatusRecord item)
-	{
-		if (item.Status == AnalysisStatus.Faulted)
-			return;
+    private async Task UpdateEngineStatus(EngineStatusRecord item)
+    {
+        if (item.Status == AnalysisStatus.Faulted)
+            return;
 
-		try
-		{
-			var run = await Api.GetBatchProcessingStatusAsync(item.Id);
+        try
+        {
+            var run = await Api.GetBatchProcessingStatusAsync(item.Id);
 
-			if (run != null)
-			{
-				item.Status = run.Status;
-				item.RegionScope = run.RegionScope != null && _regionScopes.TryGetValue(run.RegionScope, out var regionScope) ? regionScope : null;
-				item.RecordsProcessed = run.RecordsProcessed;
-				item.RecordCount = run.RecordCount;
-			}
-		}
-		catch (Exception ex)
-		{
-			if (item.Status != AnalysisStatus.Faulted)
-			{
-				item.Status = AnalysisStatus.Faulted;
-				MessageService.ShowMessageBar(options =>
-				{
-					options.Title = $"Error retrieving batch information for {item.Id}.";
-					options.Body = ex.Message;
-					options.Intent = MessageIntent.Error;
-					options.Section = "MESSAGES_TOP";
-					options.Timeout = 4000;
-				});
-			}
-		}
-	}
+            if (run != null)
+            {
+                item.Status = run.Status;
+                item.RegionScope = run.RegionScope != null && _regionScopes.TryGetValue(run.RegionScope, out var regionScope) ? regionScope : null;
+                item.RecordsProcessed = run.RecordsProcessed;
+                item.RecordCount = run.RecordCount;
+            }
+        }
+        catch (Exception ex)
+        {
+            if (item.Status == AnalysisStatus.Faulted
+                || (ex is HttpRequestException { StatusCode: System.Net.HttpStatusCode.NotFound }))
+                return;
 
-	private async Task UpdateEngineResult()
-	{
-		try
-		{
-			if (_selectedId != null)
-			{
-				_result = (await Api.GetBatchProcessingAsync(_selectedId.Value))?.AggregateResult;
-			}
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine(ex.Message);
-		}
-	}
+            item.Status = AnalysisStatus.Faulted;
+            MessageService.ShowMessageBar(options =>
+            {
+                options.Title = $"Error retrieving batch information for {item.Id}.";
+                options.Body = ex.Message;
+                options.Intent = MessageIntent.Error;
+                options.Section = "MESSAGES_TOP";
+                options.Timeout = 4000;
+            });
+        }
+    }
 
-	public void Dispose()
-	{
-		_timer?.Dispose();
-	}
+    private async Task UpdateEngineResult()
+    {
+        try
+        {
+            if (_selectedId != null)
+            {
+                _result = (await Api.GetBatchProcessingAsync(_selectedId.Value))?.AggregateResult;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
 }

@@ -42,28 +42,35 @@ app.MapPost("/batchProcessing", async (IClusterClient client, [FromBody] int rec
     var grain = client.GetGrain<IEngineGrain>(Guid.NewGuid());
     RequestContext.Set("cloud.region", region);
     await grain.RunAnalysis(records);
-    return grain.GetPrimaryKey();
+    return Results.Ok(grain.GetPrimaryKey());
 });
 
 app.MapGet("/batchProcessing/{id}/status", async (IClusterClient client, Guid id) =>
 {
-    var grain = client.GetGrain<IEngineGrain>(id);
-    var status = await grain.GetStatus();
-    return status;
+    try
+    {
+        var grain = client.GetGrain<IEngineGrain>(id);
+        var status = await grain.GetStatus();
+        return Results.Ok(status);
+    }
+    catch (SiloUnavailableException ex)
+    {
+        return Results.NotFound(ex.Message);
+    }
 });
 
 app.MapGet("/batchProcessing", async (IClusterClient client) =>
 {
     var grain = client.GetGrain<IBatchProcessManagerGrain>(0);
     var processes = await grain.GetBatchProcesses();
-    return processes;
+    return Results.Ok(processes);
 });
 
 app.MapGet("/batchProcessing/{id}", async (IClusterClient client, Guid id) =>
 {
     var grain = client.GetGrain<IBatchProcessManagerGrain>(0);
     var process = await grain.GetBatchProcess(id);
-    return process;
+    return Results.Ok(process);
 });
 
 app.MapDefaultEndpoints();

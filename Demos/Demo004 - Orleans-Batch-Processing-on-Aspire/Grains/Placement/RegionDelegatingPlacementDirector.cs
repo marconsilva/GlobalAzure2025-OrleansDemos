@@ -13,6 +13,11 @@ internal class RegionDelegatingPlacementDirector(ISiloMetadataCache siloMetadata
         var regionScope = target.RequestContextData?.TryGetValue(RegionDelegatingPlacement.RegionHintKey, out var regionHint) == true && regionHint is string
             ? (string)regionHint : target.GrainIdentity.GetKeyExtension();
 
+        if (string.IsNullOrEmpty(regionScope))
+        {
+            throw new SiloUnavailableException($"Unable to select a candidate for grain '{target.GrainIdentity}' because a region was not specified.");
+        }
+
         context = new RegionalPlacementContext(context, siloMetadataCache, regionScope);
         return placementDirector.OnAddActivation(innerStrategy, target, context);
     }
