@@ -127,7 +127,7 @@ This repository is organized into several demo projects, each showcasing a uniqu
 - **What you'll learn**: Building scalable, cloud-native apps with Orleans.
 
 ### **Demo004 - Orleans Batch Processing on Aspire**
-- **What it is**: A demo showcasing batch processing with Orleans.
+- **What it is**: A demo showcasing batch processing with Orleans and custom grain placement.
 - **How to run**:
   1. Navigate to the `Demo004 - Orleans Batch Processing on Aspire` folder in **Visual Studio Code**.
   2. Follow the README in the `Demo004` folder for detailed steps.
