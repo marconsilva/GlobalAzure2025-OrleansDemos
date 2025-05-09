@@ -44,6 +44,18 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+else
+{
+    // Use Kubernetes for hosting
+    orleansBuilder.UseKubernetesHosting();
+
+    // Configure Redis for clustering and persistence
+    var redisAddress = $"{Environment.GetEnvironmentVariable("REDIS")}:6379";
+    orleansBuilder
+        .UseRedisClustering(options => options.ConnectionString = redisAddress)
+        .AddRedisGrainStorage("votes", options => options.ConnectionString = redisAddress)
+        .UseDashboard(options => { });
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
