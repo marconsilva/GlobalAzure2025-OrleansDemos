@@ -10,8 +10,8 @@ internal class RegionDelegatingPlacementDirector(ISiloMetadataCache siloMetadata
         var innerStrategy = ((strategy as RegionDelegatingPlacement) ?? throw new ArgumentException("Argument must be of type RegionBasedPlacement", nameof(strategy))).InnerStrategy;
         var placementDirector = directorResolver.GetPlacementDirector(innerStrategy);
 
-        var regionScope = target.RequestContextData?.TryGetValue(RegionDelegatingPlacement.RegionHintKey, out var regionHint) == true && regionHint is string
-            ? (string)regionHint : target.GrainIdentity.GetKeyExtension();
+        var regionScope = target.RequestContextData?.TryGetValue(RegionDelegatingPlacement.RegionHintKey, out var hint) == true
+            && hint is string regionHint ? regionHint : target.GrainIdentity.GetKeyExtension();
 
         if (string.IsNullOrEmpty(regionScope))
         {

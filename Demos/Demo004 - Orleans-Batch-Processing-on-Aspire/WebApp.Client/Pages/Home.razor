@@ -29,9 +29,9 @@
     <FluentDataGrid Id="batches" TGridItem="EngineStatusRecord" Items="@_engineRuns.AsQueryable()" Pagination="@_pagination" AutoFit="true" Style="overflow-x: auto;">
         <SelectColumn TGridItem="EngineStatusRecord" Property="@(e => e.Id == _selectedId)" OnSelect="@(e => OnSelect(e.Item.Id, e.Selected))" Selectable="@(e => e.Status == AnalysisStatus.Completed)" SelectFromEntireRow="true" />
         <PropertyColumn Title="Id" Property="@(c => c!.Id)" Align="Align.Start" />
-        <PropertyColumn Title="Status" Property="@(c => c!.Status)" Align="Align.Center" />
-        <PropertyColumn Title="Region" Property="@(c => c!.RegionScope)" Align="Align.Center" />
-        <PropertyColumn Title="Processed" Property="@(c => c!.RecordsProcessed)" Align="Align.Center" />
+        <PropertyColumn Title="Status" Property="@(c => c!.Status)" Align="Align.Center" Sortable="true" />
+        <PropertyColumn Title="Region" Property="@(c => c!.RegionScope)" Align="Align.Center" Sortable="true" />
+        <PropertyColumn Title="Processed" Property="@(c => c!.RecordsProcessed)" Align="Align.Center" Sortable="true" />
         <PropertyColumn Title="Total Records" Property="@(c => c!.RecordCount)" Align="Align.Center" />
     </FluentDataGrid>
 </div>
