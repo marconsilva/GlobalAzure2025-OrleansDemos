@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Orleans.Placement;
-using Orleans.Runtime.Placement;
 
 namespace BatchProcessing.Grains;
 

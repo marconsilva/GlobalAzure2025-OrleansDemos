@@ -4,7 +4,6 @@ using BatchProcessing.Domain.Models;
 using BatchProcessing.Shared;
 using Microsoft.Extensions.Logging;
 using Orleans.Placement;
-using Orleans.Runtime.Placement;
 
 namespace BatchProcessing.Grains;
 
