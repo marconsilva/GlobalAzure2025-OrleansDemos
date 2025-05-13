@@ -9,7 +9,14 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/Demos/Demo003 - Orleans Voting App/Voting.csproj"
+        },
+        {
+            "name": "C#: Demo004 Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Demos/Demo004 - Orleans-Batch-Processing-on-Aspire/AppHost/BatchProcessing.AppHost.csproj"
         }
+
 
     ]
 }
