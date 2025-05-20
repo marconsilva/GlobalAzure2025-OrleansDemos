@@ -26,10 +26,14 @@
     </FluentStack>
 </FluentStack>
 <div>
-    <FluentDataGrid Id="batches" TGridItem="EngineStatusRecord" Items="@_engineRuns.AsQueryable()" Pagination="@_pagination" AutoFit="true" Style="overflow-x: auto;">
+    <FluentDataGrid Id="batches" TGridItem="EngineStatusRecord" Items="@FilteredEngineRuns" Pagination="@_pagination" AutoFit="true" Style="overflow-x: auto;">
         <SelectColumn TGridItem="EngineStatusRecord" Property="@(e => e.Id == _selectedId)" OnSelect="@(e => OnSelect(e.Item.Id, e.Selected))" Selectable="@(e => e.Status == AnalysisStatus.Completed)" SelectFromEntireRow="true" />
         <PropertyColumn Title="Id" Property="@(c => c!.Id)" Align="Align.Start" />
-        <PropertyColumn Title="Status" Property="@(c => c!.Status)" Align="Align.Center" Sortable="true" />
+        <PropertyColumn Title="Status" Property="@(c => c!.Status)" Filtered="@(_visibleStatus.Count() < 4)" Align="Align.Center" Sortable="true">
+            <ColumnOptions>
+                <StatusFilter @bind-Value="_visibleStatus" />
+            </ColumnOptions>
+        </PropertyColumn>
         <PropertyColumn Title="Region" Property="@(c => c!.RegionScope)" Align="Align.Center" Sortable="true" />
         <PropertyColumn Title="Processed" Property="@(c => c!.RecordsProcessed)" Align="Align.Center" Sortable="true" />
         <PropertyColumn Title="Total Records" Property="@(c => c!.RecordCount)" Align="Align.Center" />
@@ -89,12 +93,15 @@
         { "WE", "Western Europe" },
         { "AU", "Australia" }
     };
+    private IEnumerable<AnalysisStatus> _visibleStatus = Enum.GetValues<AnalysisStatus>();
     private Guid? _selectedId = null;
     private BatchProcessResut? _result = null;
     private Timer? _timer;
     private int _recordsToCreate = 300;
     private string _regionScope = _regionScopes.First().Key;
     private bool _isSubmitting = false;
+
+    private IQueryable<EngineStatusRecord> FilteredEngineRuns { get => _engineRuns.AsQueryable().Where(s => _visibleStatus.Contains(s.Status)); }
 
     protected override async Task OnInitializedAsync()
     {

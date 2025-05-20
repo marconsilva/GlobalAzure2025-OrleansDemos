@@ -1,0 +1,70 @@
+﻿@using BatchProcessing.WebApp.Services
+
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentCheckbox Label="All" ThreeState="true" ShowIndeterminate="false" @bind-CheckState="AreAllTypesVisible" />
+    @foreach (string statusType in _allStatusTypes)
+    {
+        bool isChecked = _visibleStatusTypes.Contains(statusType);
+        <FluentCheckbox Label="@statusType"
+                        @bind-Value:get="isChecked"
+                        @bind-Value:set="c => OnResourceTypeVisibilityChanged(statusType, c)" />
+    }
+</FluentStack>
+
+@code {
+    private static readonly IEnumerable<string> _allStatusTypes = Enum.GetNames<AnalysisStatus>();
+    private readonly HashSet<string> _visibleStatusTypes = new HashSet<string>(_allStatusTypes);
+
+    [Parameter]
+    public IEnumerable<AnalysisStatus> Value
+    { 
+        get => _visibleStatusTypes.Select(s => Enum.Parse<AnalysisStatus>(s));
+        set
+        {
+            foreach (var statusType in value.Select(s => Enum.GetName<AnalysisStatus>(s)!))
+            {
+                if (_visibleStatusTypes.Contains(statusType))
+                {
+                    _visibleStatusTypes.Add(statusType);
+                }
+                else _visibleStatusTypes.Remove(statusType);
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<IEnumerable<AnalysisStatus>> ValueChanged { get; set; }
+
+    protected void OnResourceTypeVisibilityChanged(string statusType, bool isVisible)
+    {
+        if (isVisible)
+        {
+            _visibleStatusTypes.Add(statusType);
+        }
+        else _visibleStatusTypes.Remove(statusType);
+
+        ValueChanged.InvokeAsync(Value);
+    }
+
+    private bool? AreAllTypesVisible
+    {
+        get
+        {
+            return _visibleStatusTypes.SetEquals(_allStatusTypes)
+                ? true : _visibleStatusTypes.Count == 0 ? false : null;
+        }
+        set
+        {
+            if (value is true)
+            {
+                _visibleStatusTypes.UnionWith(_allStatusTypes);
+            }
+            else if (value is false)
+            {
+                _visibleStatusTypes.Clear();
+            }
+
+            ValueChanged.InvokeAsync(Value);
+        }
+    }
+}
