@@ -16,21 +16,7 @@
     private readonly HashSet<string> _visibleStatusTypes = new HashSet<string>(_allStatusTypes);
 
     [Parameter]
-    public IEnumerable<AnalysisStatus> Value
-    { 
-        get => _visibleStatusTypes.Select(s => Enum.Parse<AnalysisStatus>(s));
-        set
-        {
-            foreach (var statusType in value.Select(s => Enum.GetName<AnalysisStatus>(s)!))
-            {
-                if (_visibleStatusTypes.Contains(statusType))
-                {
-                    _visibleStatusTypes.Add(statusType);
-                }
-                else _visibleStatusTypes.Remove(statusType);
-            }
-        }
-    }
+    public IEnumerable<AnalysisStatus> Value { get; set; } = Enum.GetValues<AnalysisStatus>();
 
     [Parameter]
     public EventCallback<IEnumerable<AnalysisStatus>> ValueChanged { get; set; }
@@ -41,8 +27,12 @@
         {
             _visibleStatusTypes.Add(statusType);
         }
-        else _visibleStatusTypes.Remove(statusType);
+        else
+        {
+            _visibleStatusTypes.Remove(statusType);
+        }
 
+        Value = _visibleStatusTypes.Select(s => Enum.Parse<AnalysisStatus>(s));
         ValueChanged.InvokeAsync(Value);
     }
 
@@ -64,6 +54,7 @@
                 _visibleStatusTypes.Clear();
             }
 
+            Value = _visibleStatusTypes.Select(s => Enum.Parse<AnalysisStatus>(s));
             ValueChanged.InvokeAsync(Value);
         }
     }
