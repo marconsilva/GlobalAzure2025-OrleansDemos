@@ -53,7 +53,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
 
     private async Task CreateRecords(int recordsToSimulate)
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var batchProcess = new BatchProcess
         {
@@ -158,7 +158,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
     {
         try
         {
-            await using var context = contextFactory.Create();
+            using var context = contextFactory.Create();
 
             var key = this.GetPrimaryKey();
 
@@ -190,7 +190,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
     {
         try
         {
-            await using var context = contextFactory.Create();
+            using var context = contextFactory.Create();
 
             var key = this.GetPrimaryKey();
 
@@ -234,7 +234,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
     /// <returns>A Task containing a list of records to process.</returns>
     private async Task<List<AnalysisRecord>> GetBatch(int workerCount)
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var batch = await context.BatchProcessItems
             .Where(bpi => bpi.BatchProcessId == this.GetPrimaryKey() && bpi.Status == BatchProcessItemStatus.Created)
@@ -268,7 +268,7 @@ internal class EngineGrain(ContextFactory contextFactory, IOptions<EngineConfig>
     /// <returns>The generated aggregate result or null if no result is available.</returns>
     private async Task<BatchProcessAggregateResult?> GenerateAggregateResult(BatchProcess batchProcess)
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var analysisTimestamp = DateTime.UtcNow;
 

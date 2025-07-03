@@ -11,7 +11,7 @@ public class BatchProcessManagerGrain(ContextFactory contextFactory) : IBatchPro
 {
     public async Task<IEnumerable<BatchProcessRecord>> GetBatchProcesses()
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var batchProcessRecords = await context.BatchProcesses
             .Select(x => new BatchProcessProjection(x.Id, x.CreatedOn, x.CompletedOn, x.Status)).ToListAsync();
@@ -21,7 +21,7 @@ public class BatchProcessManagerGrain(ContextFactory contextFactory) : IBatchPro
 
     private async Task<IEnumerable<BatchProcessRecord>> SetRecordCountsAsync(List<BatchProcessProjection> batchProcessRecords)
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var results = new List<BatchProcessRecord>();
 
@@ -37,7 +37,7 @@ public class BatchProcessManagerGrain(ContextFactory contextFactory) : IBatchPro
     [ReadOnly]
     public async Task<BatchProcessRecord?> GetBatchProcess(Guid engineId)
     {
-        await using var context = contextFactory.Create();
+        using var context = contextFactory.Create();
 
         var fullList= await context.BatchProcesses.Select(bp => new
         {

@@ -19,7 +19,7 @@ internal class EngineWorkerGrain(ContextFactory contextFactory, ILogger<EngineWo
 
         try
         {
-            await using var context = contextFactory.Create();
+            using var context = contextFactory.Create();
 
             var item = await context.BatchProcessItems.FindAsync(id);
 
